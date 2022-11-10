@@ -13,8 +13,6 @@ namespace tinySTL {
 		}
 	}
 
-	/* std::is_integral<InputIterator>()为std::false_type时调用
-	* 解决InputIterator被生成int类型 */
 	template <class T, class Alloc>
 	template <class InputIterator>
 	void list<T, Alloc>::ctorAux(InputIterator first, InputIterator last, std::false_type)
@@ -96,7 +94,7 @@ namespace tinySTL {
 
 	}
 
-	/* 移动构造函数，使用ilist的所有内存 */
+	/* Move constructor */
 	template <class T, class Alloc>
 	list<T, Alloc>::list(list &&ilist) : list() {
 		if (!ilist.empty())
@@ -104,12 +102,11 @@ namespace tinySTL {
 			header_.node_->next = std::move(ilist.header_.node_->next);
 			tail_.node_->prev = std::move(ilist.tail_.node_->prev);
 		}
-		/* 改变other的成员防止other析构时释放数据 */
 		ilist.header_.node_->next = ilist.tail_.node_;
 		ilist.tail_.node_->prev = ilist.header_.node_;
 	}
 
-	/* 列表初始化构造函数 */
+	/*  List initializer constructor */
 	template <class T, class Alloc>
 	list<T, Alloc>::list(std::initializer_list<T> init)
 		: list(init.begin(), init.end())
@@ -436,7 +433,7 @@ namespace tinySTL {
 		sort(begin(), end(), [](const auto &lhs, const auto &rhs) {return lhs < rhs; });
 	}
 
-	/* 链表的归并排序 */
+	/* Merge sort of list */
 	template <class T, class Alloc>
 	template <class Compare>
 	void list<T, Alloc>::sort(Compare compare) {

@@ -25,7 +25,6 @@ namespace tinySTL {
 			/* Constructors ans destructor */
 			priority_queue(const value_compare& compare, const container_type& cont);
 
-			/* 一般建议在声明中定义默认参数值，而不是在函数定义中，因为声明是用户可以看到的，但是定时是用户看不到的 */
 			explicit priority_queue(const value_compare& compare = value_compare(), container_type&& cont = container_type());
 
 			priority_queue(const priority_queue& other);

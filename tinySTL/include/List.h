@@ -78,7 +78,6 @@ namespace tinySTL {
 		typedef ListNode<T>* node_pointer;
 
 	private:
-		/* 头尾结点，额外的两个指针 */
 		iterator header_;
 		iterator tail_;
 		typedef SimpleAlloc<ListNode<T>, Alloc> nodeAllocator;
